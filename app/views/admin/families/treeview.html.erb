@@ -1,0 +1,23 @@
+<h2><%= t(:treeview, :default => 'Treeview') %> <%= t(:family, :default => "family") %></h2>
+
+<div id="treeview">
+  <ul>
+    <% Family.transaction do %>
+    <% ar = Family.where(:family_id => nil) %>
+    <% ar = ar.order("position") if Family.column_names.include?("position") %>
+      <% for g in ar.all %>
+        <%= build_treeview(g, 'families') %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+
+<%
+ namespace_for_url = "admin/"
+ plural_model_name = "families"
+ model_name        = "family"
+ opened_node       = Family.select(:id).all.map{ |g| '"treeelt_' + g.id.to_s + '"' }.join(',').html_safe
+%>
+
+<%= render :partial => "layouts/treeview_js", :locals => { :model_name => model_name, :plural_model_name => plural_model_name, :opened_node => opened_node, :namespace_for_url => namespace_for_url } %>
+

@@ -1,0 +1,16 @@
+<h2><%= t(:show, :default => "Show") %> <%= t(:family, :default => "family") %></h2>
+
+  <p>
+    <b><%= t(:name, :default => "Name") %>:</b>
+      <%= @family.name %>
+  </p>
+  <p>
+    <b><%= t(:description, :default => "Description") %>:</b>
+      <%= @family.description %>
+  </p>
+
+<!-- Beautiful_scaffold - AddField - Field - Do not remove -->
+
+<%= link_to t(:edit, :default => "Edit"), edit_admin_family_path(@family), :class => "btn" %>
+<%= link_to t(:back, :default => "Back"), admin_families_path, :class => "btn" %>
+

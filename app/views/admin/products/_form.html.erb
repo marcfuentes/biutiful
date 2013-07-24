@@ -1,0 +1,56 @@
+
+<%= form_for([:admin, @product ], :html => { :class => "form-horizontal" }) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% @product.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %>
+      </ul>
+    </div>
+  <% end %>
+      <div class="control-group">
+      <%= f.label :name, t(:name, :default => "name").capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :price, t(:price, :default => "price").capitalize, :class => "control-label" %>
+      <div class="controls">
+        <div class="input-prepend">
+          <span class="add-on">$</span><%= f.text_field :price %>
+        </div>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :tva, t(:tva, :default => "tva").capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :tva %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :description, t(:description, :default => "description").capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_area :description, :rows => 5 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :visible, t(:visible, :default => "visible").capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.check_box :visible %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :family, t(:family, :default => "family").capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.collection_select :family_id, Family.all, :id, :caption, :include_blank => true %>
+      </div>
+    </div>
+<!-- Beautiful_scaffold - AddField - Do not remove -->
+  <div class="form-actions">
+    <%= f.submit :class => "btn btn-primary" %>
+  </div>
+<% end %>
+
+
